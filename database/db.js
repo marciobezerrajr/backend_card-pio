@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+
+const result = dotenv.config()
 
 require("../models/Category")
 require("../models/Snack")
 require("../models/User")
 
-mongoose.connect("mongodb+srv://marcio:070794@cluster0.fawuu.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect(`mongodb+srv://${result.parsed.MONGO_USER}:${result.parsed.MONGO_PASS}@cluster0.fawuu.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
