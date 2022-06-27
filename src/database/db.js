@@ -5,8 +5,7 @@ require("../models/Category");
 require("../models/Snack");
 require("../models/User");
 
-mongoose
-  .connect(`${process.env.MONGO_URL}`, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -15,4 +14,6 @@ mongoose
   })
   .catch((err) => {
     console.log("Houve um erro ao tentar conectar ao banco. Erro: " + err);
-  });
+  }); 
+  
+ 
