@@ -16,10 +16,8 @@ app.use('/', routes)
 
 app.use('/files', express.static('uploads'))
 
-
 app.get('/', (req, res) => {
-    res.send(//`server on em localhost:${porta}
-    `<DESCRIPTION>Olá Mudo</DESCRIPTION>`)
+    res.send(`server on em localhost:${porta}`)
 })
 
-app.listen(porta, () => { console.log(`server on em localhost:${porta}`) })
+app.listen(porta, () => console.log(`server on em localhost:${porta}`))

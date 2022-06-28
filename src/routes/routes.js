@@ -3,30 +3,28 @@ const router = express.Router()
 
 const userController = require('../controllers/userController');
 const categoryController = require('../controllers/categoryController');
-// const snackController = require('../controllers/snackController');
-// const imageController = require('../controllers/imageController');
+const snackController = require('../controllers/snackController');
 
 const upload = require('multer')
 const multerConfig = require ('../middlewares/multer')
-
 
 //--------------- Category Routes ---------------
 
 router.get('/categories', categoryController.selectAll) //router select all category
 router.get('/categories/:id', categoryController.select) //router select one category
 router.post('/categories', upload(multerConfig).single('image'), categoryController.create) //router add category  upload(multerConfig).single('image')
+router.post('/category', categoryController.createNoImage) //router add category without image (image is optional)
 router.put('/categories', upload(multerConfig).single('image'), categoryController.update) //router update category  upload(multerConfig).single('image')
 router.delete('/categories', categoryController.delete) //router remove category
 
-
 //--------------- Snacks Routes ---------------
 
-// router.get('/snacks', snackController.selectAll) // select all snacks
-// router.get('/snacks/:id', snackController.select) // select one snack
-// router.post('/snacks', upload.single('image'), snackController.create) // insert snack
-// router.put('/snacks/:id', upload.single('image'), snackController.update) // update one snack
-// router.put('/snacks/:id', upload.single('image'), snackController.updateAll) // update all snack
-// router.delete('/snacks/:id', snackController.delete) //remove snack
+router.get('/snacks', snackController.selectAll) // select all snacks
+router.get('/snacks/:id', snackController.select) // select one snack
+router.post('/snacks', upload(multerConfig).single('image'), snackController.create) // insert snack
+// router.put('/snacks/:id', upload(multerConfig).single('image'), snackController.update) // update one snack
+// router.put('/snacks/:id', snackController.updateAll) // update all snack
+router.delete('/snacks/:id', snackController.delete) //remove snack
 
 
 //--------------- User Routes ---------------
