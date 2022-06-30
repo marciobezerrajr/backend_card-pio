@@ -2,7 +2,7 @@ const Snack = require('../models/Snack')
 const Category = require('../models/Category')
 const dropImage = require('../utils/DropFile')
 
-class snackController {
+module.exports = new class snackController {
 
     async create(req, res) {
         const { category, value, description, name } = req.body
@@ -31,7 +31,7 @@ class snackController {
                 Snack.create(newSnack).then(() => {
                     res.status(200).json({ "message": "Lanche inserido com sucesso!" })
                 }).catch((err) => {
-                    res.status(404).json({ "message": "Houve um erro ao processar a requisição, tente novamente mais tarde" })
+                    res.status(404).json({ "message": err })
                     dropImage.Drop(image)
                 })
             } catch (err) {
@@ -40,48 +40,41 @@ class snackController {
             }
         }
     }
-
     async update(req, res) {
-        
-        const { category, value, description, name } = req.body
+
+        const { id, category, value, description, name } = req.body
         const image = req.file.image
-       
+
         Snack.findOne({ _id: id }).then(async (snack) => {
-
-            const snackExists = await Snack.findOne({ name });
-
-            //ARRUMAR VALIDAÇÃO E UPDATE
-            if (snackExists) {
-                res.status(401).json({ "message": "Já existe uma categoria com este nome." })
-                dropImage.Drop(image)
-                return
-            }
-
-            snack.snack = categegory,
-            snack.image = image
-            snack.value = value
-            snack.description = description
-            snack.name = name
-
+            const oldImage = snack.image
+            
+            snack.category = category ? category : snack.category
+            snack.value = value ? value : snack.value,
+            snack.description = description ? description : snack.description
+            snack.name = name ? name : snack.name
+            snack.image = image ? image : snack.image
+           
             snack.save().then(() => {
-                console.log('Categoria editada com sucesso!')
-                res.status(200).json({ "message": 'Categoria editada com sucesso!' })
+                console.log('Lanche editada com sucesso!')
+                res.status(200).json({ "message": 'Lanche editado com sucesso!' })
+                dropImage.Drop(oldImage)
 
             }).catch((err) => {
-                console.log("Erro ao salvar categoria, " + err)
-                res.status(404).json({ "message": "Não foi possível salvar a categoria" })
+                console.log("Erro ao salvar as alterações, " + err)
+                res.status(404).json({ "message": "Não foi possível salvar as alterações" })
                 dropImage.Drop(image)
+
             })
         }).catch((err) => {
-            console.log("Não foi possível salvar a categoria, " + err)
-            res.status(404).json({ "message": "Não foi possível salvar a categoria" })
+            console.log("Lanche não encontrado, verifique novamente, " + err)
+            res.status(404).json({ "message": "Não foi possível salvar as alterações" })
             dropImage.Drop(image)
         })
     }
     async select(req, res) {
         const id = req.params.id
 
-        Snack.findOne({ _id: id }).populate('snacks').then(snacks => {
+        Snack.findOne({ _id: id }).then(snacks => { //.populate('snack')
             res.send(snacks)
         }).catch((err) => {
             res.send('Houve um erro ao realizar essa requisição, ' + err)
@@ -89,11 +82,10 @@ class snackController {
         })
     }
     async selectAll(req, res) {
-        Snack.find().populate('snacks').then(snacks => {
+        Snack.find().then(snacks => { //.populate('snack')
             res.send(snacks)
         }).catch((err) => {
-            res.send('Houve um erro ao realizar essa requisição, ' + err)
-            res.redirect("/")
+            res.send('Houve um erro ao realizar essa requisição,\n ' + err)
         })
     }
     async delete(req, res) {
@@ -104,22 +96,18 @@ class snackController {
                 try {
                     dropImage.Drop(image)
                     res.status(200).json({ "message": "Categoria deletada com sucesso!" })
-                    console.log("Categoria deletada com sucesso!")
                     return
 
                 } catch (err) {
-                    res.status(404).json({ "message": "Houve um erro ao tentar excluir esta categoria, por favor tente novamente mais tarde" })
-                    console.log(err)
+                    res.status(404).json({ "message": "Houve um erro ao tentar excluir esta categoria, por favor tente novamente mais tarde\n" + err })
                 }
             }).catch((err) => {
-                res.status(404).json({ "message": "Houve um erro ao realizar essa requisição, por favor tente novamente mais tarde" })
-
+                res.status(404).json({ "message": "Houve um erro ao tentar excluir esta categoria, por favor tente novamente mais tarde\n" + err })
             })
         }).catch((err) => {
-            res.status(404).json({ "message": "Houve um erro ao realizar essa requisição, por favor tente novamente mais tarde" })
+            res.status(404).json({ "message": "Houve um erro ao tentar excluir esta categoria, por favor tente novamente mais tarde\n" + err })
 
         })
     }
 }
 
-module.exports = new snackController()

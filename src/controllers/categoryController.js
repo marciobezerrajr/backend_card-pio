@@ -1,7 +1,7 @@
 const Category = require('../models/Category')
 const dropImage = require('../utils/DropFile')
 
-class categoryController {
+module.exports = new class categoryController {
 
     async create(req, res) {
         const { category } = req.body
@@ -38,7 +38,6 @@ class categoryController {
             }
         }
     }
-
     async createNoImage(req, res) {
         const { category } = req.body
         const icon = null
@@ -72,27 +71,23 @@ class categoryController {
             }
         }
     }
-
     async update(req, res) {
         const id = req.body.id
         const categ = req.body.category
         const icon = !(req.file.icon == undefined) ? req.file.icon : req.body.icon
 
+            console.log(icon)
+            
         Category.findOne({ _id: id }).then(async (category) => {
-            const categoryExists = await Category.findOne({ category: categ });
+            const oldIcon = category.icon
 
-            if (categoryExists) {
-                res.status(401).json({ "message": "Já existe uma categoria com este nome." })
-                dropImage.Drop(icon)
-                return
-            }
-
-            category.category = categ,
-                category.icon = icon
+            category.category = categ? categ : category.category
+            category.icon = icon? icon : category.icon
 
             category.save().then(() => {
                 console.log('Categoria editada com sucesso!')
                 res.status(200).json({ "message": 'Categoria editada com sucesso!' })
+                dropImage.Drop(oldIcon)
 
             }).catch((err) => {
                 console.log("Erro ao salvar categoria, " + err)
@@ -148,5 +143,3 @@ class categoryController {
         })
     }
 }
-
-module.exports = new categoryController()

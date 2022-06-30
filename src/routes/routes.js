@@ -22,10 +22,8 @@ router.delete('/categories', categoryController.delete) //router remove category
 router.get('/snacks', snackController.selectAll) // select all snacks
 router.get('/snacks/:id', snackController.select) // select one snack
 router.post('/snacks', upload(multerConfig).single('image'), snackController.create) // insert snack
-// router.put('/snacks/:id', upload(multerConfig).single('image'), snackController.update) // update one snack
-// router.put('/snacks/:id', snackController.updateAll) // update all snack
-router.delete('/snacks/:id', snackController.delete) //remove snack
-
+router.put('/snacks', upload(multerConfig).single('image'), snackController.update) // update one snack
+router.delete('/snacks', snackController.delete) //remove snack
 
 //--------------- User Routes ---------------
 

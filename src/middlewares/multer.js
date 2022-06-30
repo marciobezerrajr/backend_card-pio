@@ -19,9 +19,10 @@ const storageTypes = {
       })
     },
   }),
-  //necessita installar:
+  //necessita installar e instanciar:
   //const aws = require("aws-sdk");
   //const multerS3 = require("multer-s3");
+  
   // s3: multerS3({
   //   s3: new aws.S3(),
   //   bucket: process.env.BUCKET_NAME,
