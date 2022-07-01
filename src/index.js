@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan-body')
-const moment = require('moment')
 const path = require('path')
 const fs = require('fs')
 require('./database/db')
@@ -14,7 +13,6 @@ const router = require('./routes/routes.js')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 
 var date = new Date().toJSON().slice(0,10).split('-').reverse().join('.')
 const log = fs.createWriteStream(
