@@ -1,0 +1,25 @@
+
+Request: GET / at Thu Jun 30 2022 23:45:09 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+Response Body:
+server on em localhost:3000
+Response: 304 1.475 ms 
+
+Request: GET / at Thu Jun 30 2022 23:45:13 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+Response Body:
+server on em localhost:3000
+Response: 304 0.459 ms 
+
+Request: GET /snacks at Thu Jun 30 2022 23:46:15 GMT-0300, IP: ::ffff:127.0.0.1, User Agent: insomnia/2022.4.2
+Response Body:
+[
+	{
+		"_id": "62be423f7891673c7dea3317",
+		"name": "X-Calabresa",
+		"description": "1",
+		"value": 15,
+		"category": "62b8af34a557faeb12079f02",
+		"image": "16566360085689d502593ffb92819-imagens-surreais.jpg",
+		"__v": 0
+	}
+]
+Response: 200 141.721 ms 

@@ -38,51 +38,20 @@ module.exports = new class categoryController {
             }
         }
     }
-    async createNoImage(req, res) {
-        const { category } = req.body
-        const icon = null
-
-        const newCategory = {
-            category,
-            icon
-        }
-
-        if (category == undefined || category == "" || category == " ") {
-            res.status(400).json({ "message": "A categoria é inválida!" })
-            return;
-        }
-
-        const categoryExists = await Category.findOne({ category: category });
-
-        if (categoryExists) {
-            res.status(401).json({ "message": "Já existe uma categoria com este nome." })
-            return;
-        }
-        else {
-            try {
-                Category.create(newCategory).then(() => {
-                    res.status(200).json({ message: "Categoria criada com sucesso!" })
-                    res.send(Category.findOne({ category: categ }))
-                }).catch((err) => {
-                    res.status(404).json({ "message": "Houve um erro ao processar a requisição, tente novamente mais tarde" })
-                })
-            } catch (err) {
-                res.status(500).json({ error: err })
-            }
-        }
-    }
     async update(req, res) {
         const id = req.body.id
         const categ = req.body.category
-        const icon = !(req.file.icon == undefined) ? req.file.icon : req.body.icon
+        var icon, oldIcon
 
-            console.log(icon)
-            
         Category.findOne({ _id: id }).then(async (category) => {
-            const oldIcon = category.icon
+            if (req.file) {
+                oldIcon = category.icon
+                category.category = categ ? categ : category.category
+                category.icon = req.file.filename
 
-            category.category = categ? categ : category.category
-            category.icon = icon? icon : category.icon
+            } else {
+                category.category = categ ? categ : category.category
+            }
 
             category.save().then(() => {
                 console.log('Categoria editada com sucesso!')

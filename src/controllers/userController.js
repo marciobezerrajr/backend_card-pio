@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const User = mongoose.model("user")
 
-
-
 class UserController {
     async selectAll(req, res) {
     }
@@ -21,6 +19,8 @@ class UserController {
     async delete(req, res) {
         
     }
+
+
 
     async recoverPassword(req, res) {
         

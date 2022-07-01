@@ -13,7 +13,6 @@ const multerConfig = require ('../middlewares/multer')
 router.get('/categories', categoryController.selectAll) //router select all category
 router.get('/categories/:id', categoryController.select) //router select one category
 router.post('/categories', upload(multerConfig).single('image'), categoryController.create) //router add category  upload(multerConfig).single('image')
-router.post('/category', categoryController.createNoImage) //router add category without image (image is optional)
 router.put('/categories', upload(multerConfig).single('image'), categoryController.update) //router update category  upload(multerConfig).single('image')
 router.delete('/categories', categoryController.delete) //router remove category
 
