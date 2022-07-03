@@ -52,7 +52,7 @@ class UserController {
 
             user.name = name ? name : user.name
             user.email = email ? email : user.email,
-                user.password = password ? password : user.password
+            user.password = password ? password : user.password
             user.isAdmin = isAdmin ? isAdmin : user.isAdmin
 
             user.save().then(() => {
@@ -64,8 +64,7 @@ class UserController {
                 res.status(404).json({ "message": "Não foi possível salvar as alterações" })
             })
         }).catch((err) => {
-            console.log("Lanche não encontrado, verifique novamente, " + err)
-            res.status(404).json({ "message": "Não foi possível salvar as alterações" })
+            res.status(404).json({ "message": "Usuário não encontrado" })
         })
     }
     async delete(req, res) {
@@ -74,7 +73,6 @@ class UserController {
                 try {
                     res.status(200).json({ "message": "Usuário excluido com sucesso!" })
                     return
-
                 } catch (err) {
                     res.status(404).json({ "message": "Houve um erro ao tentar excluir este usuário, por favor tente novamente mais tarde\n" + err })
                 }
@@ -145,7 +143,8 @@ class UserController {
     }
     async logout(req, res) {
         req.session.destroy(function (err) { })
-        res.redirect('/')
+        res.status(200).json({ 'message': 'sessão finalizada' })
+        // res.redirect('/')
     }
 
 }
