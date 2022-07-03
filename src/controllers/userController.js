@@ -91,7 +91,7 @@ class UserController {
 
         User.findOne({ email }).then((user) => {
             try {
-                nodemailer.main().catch(console.error)
+                nodemailer.main().catch(console.error) //falta configurar o e-mail e link de recuperação
                 res.status(200).json({ 'message': 'Um e-mail de recuperação será enviado para sua caixa postal, por favor, verifique também a caixa de Spam!' })
             } catch (err) {
                 console.log(err)
@@ -100,7 +100,6 @@ class UserController {
             res.status(401).json({ 'message': 'Nenhuma conta com este e-mail foi encontrada ' })
         })
     }
-
     async changePassword(req, res) {
         const { email, password, confirmPassword } = req.body
 
@@ -122,7 +121,6 @@ class UserController {
             res.status(401).json({ 'message': 'A senha e confirmação de senha não conferem, por favor preencha corretamente!' })
         }
     }
-
     async login(req, res) {
         const email = req.body.email
         const password = req.body.password
@@ -145,7 +143,6 @@ class UserController {
             }
         })
     }
-
     async logout(req, res) {
         req.session.destroy(function (err) { })
         res.redirect('/')
