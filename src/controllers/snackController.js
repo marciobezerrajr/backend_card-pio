@@ -1,5 +1,4 @@
 const Snack = require('../models/Snack')
-const Category = require('../models/Category')
 const dropImage = require('../utils/DropFile')
 
 module.exports = new class snackController {

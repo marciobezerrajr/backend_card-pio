@@ -70,9 +70,7 @@ module.exports = new class categoryController {
         })
     }
     async select(req, res) {
-        const id = req.params.id
-
-        Category.findOne({ _id: id }).populate('category').then(categories => {
+        Category.findOne({ _id: req.params.id }).then(categories => {
             res.send(categories)
         }).catch((err) => {
             res.send('Houve um erro ao realizar essa requisição, ' + err)
@@ -80,7 +78,7 @@ module.exports = new class categoryController {
         })
     }
     async selectAll(req, res) {
-        Category.find().populate('category').then(categories => {
+        Category.find().then(categories => {
             res.send(categories)
         }).catch((err) => {
             res.send('Houve um erro ao realizar essa requisição, ' + err)

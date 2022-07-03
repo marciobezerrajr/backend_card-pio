@@ -29,12 +29,12 @@ router.delete('/snacks', snackController.delete) //remove snack
 router.post('/users', userController.create) //register
 router.get('/users/:id', userController.select) //select one user
 router.get('/users', userController.selectAll) //select all users
-router.put('/users/:id', userController.update) //select all users
-router.delete('/users/', userController.delete) //select all users
+router.put('/users', userController.update) //select all users
+router.delete('/users', userController.delete) //select all users
 
-// router.post('/auth', userController.login); //user login
-// router.get('/logout', userController.logout) //logout
-// router.get('/recoverpassword/:id', userController.recoverPassword)  //forget password
-// router.put('/changepassword/:id', userController.changePassword) //alter password
+router.post('/auth', userController.login); //user login
+router.get('/logout', userController.logout) //logout
+router.get('/forgotpassword/:id', userController.forgotPassword)  //forgot password
+router.put('/changepassword', userController.changePassword) //alter password
 
 module.exports = router
