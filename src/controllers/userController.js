@@ -83,7 +83,6 @@ class UserController {
             res.status(404).json({ "message": "Usuário não encontrado\n" + err })
         })
     }
-
     async forgotPassword(req, res) {
         const { email } = req.body
 

@@ -5,6 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const session = require('express-session')
 const passport = require("passport")
+const helmet = require("helmet")
 
 require('./database/db')
 require('./config/auth')(passport)
@@ -15,6 +16,7 @@ const app = express()
 
 const porta = process.env.PORT || 3000
 
+app.use(helmet());
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -29,6 +31,7 @@ morgan(app, {
 
 app.use(session({
     secret: process.env.SECRET_SESSION,
+    cookie: {maxAge: 3000000},
     resave: true,
     saveUninitialized: true,
 }))
