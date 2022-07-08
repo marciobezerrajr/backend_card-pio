@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
-const nodemailer = require('../services/nodemailer')
+const nodemailer = require('../config/nodemailer')
 
 class UserController {
 
