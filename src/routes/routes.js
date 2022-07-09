@@ -4,6 +4,7 @@ const router = express.Router()
 const userController = require('../controllers/userController');
 const categoryController = require('../controllers/categoryController');
 const snackController = require('../controllers/snackController');
+const authController = require('../controllers/authController');
 
 const upload = require('multer')
 const multerConfig = require ('../middlewares/multer')
@@ -32,9 +33,9 @@ router.get('/users', userController.selectAll) //select all users
 router.put('/users', userController.update) //select all users
 router.delete('/users', userController.delete) //select all users
 
-router.post('/auth', userController.login); //user login
-router.get('/logout', userController.logout) //logout
-router.get('/forgotpassword/:id', userController.forgotPassword)  //forgot password
-router.put('/changepassword', userController.changePassword) //alter password
+router.post('/auth', authController.login); //auth login
+router.get('/logout', authController.logout) //logout
+router.get('/forgotpassword/:id', authController.forgotPassword)  //forgot password
+router.put('/changepassword', authController.changePassword) //alter password
 
 module.exports = router
