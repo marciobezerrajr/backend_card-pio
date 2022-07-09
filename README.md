@@ -4,7 +4,7 @@
 
 ## ✨ Idealização
 
-Projeto idealizado para a criação de um cardápio digital, chamado MainMenu, este projeto será realizado em conjunto por três amigos e visa o aprendizado e utilização de várias tecnologias já estudadas, cada qual com sua área de estudo. Como minha responsabilidade, no caso do backend, optei por iniciar com NodeJs e futuramente readequar o projeto utilizando Typescript e algum ORM com banco de dados relacional.
+Projeto idealizado para a criação de um cardápio digital, chamado MainMenu, este projeto será realizado em conjunto por três amigos e visa o aprendizado e utilização de várias tecnologias já estudadas, cada qual com sua área de estudo. Como minha responsabilidade, no caso do backend, optei por iniciar com NodeJs e MongoDB e futuramente, se for interessante, readequar o projeto utilizando Typescript e algum ORM com banco de dados relacional PostgreSQL.
 
 ## ✨ Tecnologias
 
