@@ -1,6 +1,5 @@
 const Category = require('../../models/Category')
 
-
 module.exports = class GetOneCategory {
 
     async select(req, res) {
